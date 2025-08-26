@@ -1,0 +1,13 @@
+# ninja log v6
+1	179	1756219171012566728	CMakeFiles/NeuralPlusPlus.dir/main.cpp.o.ddi	cb1d509485022fc
+179	185	1756219171196592596	CMakeFiles/NeuralPlusPlus.dir/CXX.dd	ddddeeb0b8922fc1
+179	185	1756219171196592596	/home/grigor/Projects/NeuralPlusPlus/cmake-build-debug/CMakeFiles/NeuralPlusPlus.dir/CXXModules.json	ddddeeb0b8922fc1
+179	185	1756219171196592596	CMakeFiles/NeuralPlusPlus.dir/main.cpp.o.modmap	ddddeeb0b8922fc1
+185	1156	1756219171196592596	CMakeFiles/NeuralPlusPlus.dir/main.cpp.o	2508ce81d6082ae0
+1157	1318	1756219172168876923	NeuralPlusPlus	c6337f475b7ae984
+3	183	1756219183286566832	CMakeFiles/NeuralPlusPlus.dir/main.cpp.o.ddi	cb1d509485022fc
+183	189	1756219183467566834	CMakeFiles/NeuralPlusPlus.dir/CXX.dd	ddddeeb0b8922fc1
+183	189	1756219183467566834	/home/grigor/Projects/NeuralPlusPlus/cmake-build-debug/CMakeFiles/NeuralPlusPlus.dir/CXXModules.json	ddddeeb0b8922fc1
+183	189	1756219183467566834	CMakeFiles/NeuralPlusPlus.dir/main.cpp.o.modmap	ddddeeb0b8922fc1
+189	895	1756219183472859561	CMakeFiles/NeuralPlusPlus.dir/main.cpp.o	2508ce81d6082ae0
+895	997	1756219184178566840	NeuralPlusPlus	c6337f475b7ae984
