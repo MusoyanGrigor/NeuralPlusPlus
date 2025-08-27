@@ -8,9 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Include headers
 include_directories(include)
 
-# Automatically find all .cpp and .hpp files
+# Automatically find all .cpp files
 file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
-file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/include/*.hpp")
 
 # Ensure at least one source file exists
 if(NOT SOURCES)
@@ -19,7 +18,6 @@ endif()
 
 # Print for debugging
 message(STATUS "Source files: ${SOURCES}")
-message(STATUS "Header files: ${HEADERS}")
 
-# Create executable
-add_executable(NeuralPlusPlus ${SOURCES} ${HEADERS})
+# Create executable (headers are not needed here)
+add_executable(NeuralPlusPlus ${SOURCES})
