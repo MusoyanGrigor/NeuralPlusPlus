@@ -8,9 +8,9 @@ class Tensor
 public:
     using tensorShape = std::vector<std::size_t>;
 
-    tensorShape getShape() const;
-    std::size_t getNdims() const;
-    std::size_t getSize() const;
+    [[nodiscard]] tensorShape getShape() const;
+    [[nodiscard]] std::size_t getNdims() const;
+    [[nodiscard]] std::size_t getSize() const;
 
     static Tensor zeros(tensorShape shape);
     static Tensor eye(std::size_t N);
