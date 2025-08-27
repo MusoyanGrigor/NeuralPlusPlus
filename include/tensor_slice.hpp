@@ -2,7 +2,7 @@
 #define TENSOR_SLICE_HPP
 
 #include <vector>
-
+ 
 class Tensor;
 
 class TensorSlice {
@@ -11,7 +11,7 @@ public:
 
   // access sub-slice elements
   TensorSlice operator[](std::size_t index);
-  operator double&();
+  explicit operator double&();
   TensorSlice& operator=(double value);
 
 private:
