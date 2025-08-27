@@ -14,7 +14,7 @@ public:
 
     static Tensor zeros(tensorShape shape);
     static Tensor full(tensorShape shape, double value);
-    static Tensor eye(std::size_t N);
+    static Tensor eye(std::size_t rows, std::size_t cols);
 
     Tensor& operator[](std::size_t index);
     const Tensor& operator[](std::size_t index) const;

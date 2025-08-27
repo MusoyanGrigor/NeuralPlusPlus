@@ -32,10 +32,13 @@ Tensor Tensor::full(tensorShape shape, double value) {
     return t;
 }
 
-Tensor Tensor::eye(std::size_t N) {
-    Tensor t({N, N});
-    for(std::size_t i = 0; i < N; i++) {
-        std::size_t flat_index = i * N + i;
+Tensor Tensor::eye(std::size_t rows, std::size_t cols = 0) {
+  if(cols == 0) cols = rows;
+  Tensor t({rows, cols});
+
+  std::size_t min_dim = std::min(rows, cols);
+    for(std::size_t i = 0; i < min_dim; i++) {
+        std::size_t flat_index = i * cols + i;
         t.m_data[flat_index] = 1.0;
     }
     return t;
