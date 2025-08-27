@@ -21,7 +21,7 @@ public:
 
 private:
     explicit Tensor(const tensorShape& shape);
-    explicit Tensor(std::initializer_list<std::size_t> shape);
+    Tensor(std::initializer_list<std::size_t> shape);
 
     tensorShape m_shape;
     std::size_t m_ndims;
