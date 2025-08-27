@@ -1,4 +1,5 @@
 #include "tensor.hpp"
+#include <stdexcept>
 
 Tensor::tensorShape Tensor::getShape() const {
     return m_shape;
@@ -32,7 +33,7 @@ Tensor Tensor::full(tensorShape shape, double value) {
     return t;
 }
 
-Tensor Tensor::eye(std::size_t rows, std::size_t cols = 0) {
+Tensor Tensor::eye(std::size_t rows, std::size_t cols) {
   if(cols == 0) cols = rows;
   Tensor t({rows, cols});
 
@@ -42,4 +43,20 @@ Tensor Tensor::eye(std::size_t rows, std::size_t cols = 0) {
         t.m_data[flat_index] = 1.0;
     }
     return t;
+}
+
+TensorSlice Tensor::operator[](std::size_t index) {
+    if(index >= m_shape[0]) {
+        throw std::out_of_range("index exceeds dimension size");
+    }
+
+    if(m_ndims == 1) {
+        return TensorSlice(m_data, {}, index);
+    } else {
+        std::size_t stride = 1;
+        for(std::size_t i = 1; i < m_ndims; i++) {
+            stride *= m_shape[i];
+        }
+        return TensorSlice(m_data, std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()), index * stride);
+    }
 }

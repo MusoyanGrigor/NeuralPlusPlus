@@ -2,6 +2,7 @@
 #define TENSOR_HPP
 
 #include <vector>
+#include "tensor_slice.hpp"
 
 class Tensor
 {
@@ -16,11 +17,10 @@ public:
     // factory methods
     static Tensor zeros(tensorShape shape);
     static Tensor full(tensorShape shape, double value);
-    static Tensor eye(std::size_t rows, std::size_t cols);
+    static Tensor eye(std::size_t rows, std::size_t cols = 0);
 
     // Element access
-    Tensor& operator[](std::size_t index);
-    const Tensor& operator[](std::size_t index) const;
+    TensorSlice operator[](std::size_t index);
 
 private:
     explicit Tensor(const tensorShape& shape);
