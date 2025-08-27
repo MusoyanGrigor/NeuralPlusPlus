@@ -8,14 +8,17 @@ class Tensor
 public:
     using tensorShape = std::vector<std::size_t>;
 
+    // Getters
     [[nodiscard]] tensorShape getShape() const;
     [[nodiscard]] std::size_t getNdims() const;
     [[nodiscard]] std::size_t getSize() const;
 
+    // factory methods
     static Tensor zeros(tensorShape shape);
     static Tensor full(tensorShape shape, double value);
     static Tensor eye(std::size_t rows, std::size_t cols);
 
+    // Element access
     Tensor& operator[](std::size_t index);
     const Tensor& operator[](std::size_t index) const;
 
