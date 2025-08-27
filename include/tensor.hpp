@@ -13,8 +13,8 @@ public:
     [[nodiscard]] std::size_t getSize() const;
 
     static Tensor zeros(tensorShape shape);
-    static Tensor eye(std::size_t N);
     static Tensor full(tensorShape shape, double value);
+    static Tensor eye(std::size_t N);
 
     Tensor& operator[](std::size_t index);
     const Tensor& operator[](std::size_t index) const;

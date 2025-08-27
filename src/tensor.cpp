@@ -21,3 +21,22 @@ Tensor::Tensor(const tensorShape& shape) : m_shape(shape), m_ndims(shape.size())
 }
 
 Tensor::Tensor(std::initializer_list<std::size_t> shape) : Tensor(tensorShape(shape)) {} // delegates to the first constructor
+
+Tensor Tensor::zeros(tensorShape shape) {
+    return Tensor(shape);
+}
+
+Tensor Tensor::full(tensorShape shape, double value) {
+    Tensor t(shape);
+    std::fill(t.m_data.begin(), t.m_data.end(), value);
+    return t;
+}
+
+Tensor Tensor::eye(std::size_t N) {
+    Tensor t({N, N});
+    for(std::size_t i = 0; i < N; i++) {
+        std::size_t flat_index = i * N + i;
+        t.m_data[flat_index] = 1.0;
+    }
+    return t;
+}
