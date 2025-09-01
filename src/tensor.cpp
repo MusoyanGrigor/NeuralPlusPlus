@@ -37,10 +37,8 @@ Tensor Tensor::eye(std::size_t rows, std::size_t cols) {
   if(cols == 0) cols = rows;
   Tensor t({rows, cols});
 
-  std::size_t min_dim = std::min(rows, cols);
-    for(std::size_t i = 0; i < min_dim; i++) {
-        std::size_t flat_index = i * cols + i;
-        t.m_data[flat_index] = 1.0;
+    for(std::size_t i = 0; i < std::min(rows, cols); i++) {
+        t.m_data[i * cols + i] = 1.0;
     }
     return t;
 }
