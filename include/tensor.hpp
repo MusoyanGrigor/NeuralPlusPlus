@@ -15,13 +15,12 @@ public:
     [[nodiscard]] std::size_t getSize() const;
 
     // factory methods
-    static Tensor zeros(tensorShape shape);
-    static Tensor full(tensorShape shape, double value);
+    static Tensor zeros(const tensorShape& shape);
+    static Tensor full(const tensorShape& shape, double value);
     static Tensor eye(std::size_t rows, std::size_t cols = 0);
 
     // Element access
     TensorSlice operator[](std::size_t index);
-
 private:
     explicit Tensor(const tensorShape& shape);
     Tensor(std::initializer_list<std::size_t> shape);

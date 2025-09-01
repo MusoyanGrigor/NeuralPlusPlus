@@ -23,11 +23,11 @@ Tensor::Tensor(const tensorShape& shape) : m_shape(shape), m_ndims(shape.size())
 
 Tensor::Tensor(std::initializer_list<std::size_t> shape) : Tensor(tensorShape(shape)) {} // delegates to the first constructor
 
-Tensor Tensor::zeros(tensorShape shape) {
+Tensor Tensor::zeros(const tensorShape& shape) {
     return Tensor(shape);
 }
 
-Tensor Tensor::full(tensorShape shape, double value) {
+Tensor Tensor::full(const tensorShape& shape, double value) {
     Tensor t(shape);
     std::fill(t.m_data.begin(), t.m_data.end(), value);
     return t;
@@ -51,12 +51,12 @@ TensorSlice Tensor::operator[](std::size_t index) {
     }
 
     if(m_ndims == 1) {
-        return TensorSlice(m_data, {}, index);
+        return {m_data, {}, index};
     } else {
         std::size_t stride = 1;
         for(std::size_t i = 1; i < m_ndims; i++) {
             stride *= m_shape[i];
         }
-        return TensorSlice(m_data, std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()), index * stride);
+        return {m_data, std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()), index * stride};
     }
 }

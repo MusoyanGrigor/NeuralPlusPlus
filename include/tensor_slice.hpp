@@ -11,7 +11,7 @@ public:
 
   // access sub-slice elements
   TensorSlice operator[](std::size_t index);
-  explicit operator double&();
+  explicit operator double&() const;
   TensorSlice& operator=(double value);
 
 private:
