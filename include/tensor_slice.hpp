@@ -3,6 +3,8 @@
 
 #include <vector>
 
+class Tensor;
+
 class TensorSlice {
 public:
   TensorSlice(std::vector<double>& data, const std::vector<std::size_t>& shape, std::size_t offset);
@@ -11,6 +13,7 @@ public:
   TensorSlice operator[](std::size_t index);
   explicit operator double&() const;
   TensorSlice& operator=(double value);
+  TensorSlice& operator=(Tensor t);
 
 private:
   std::vector<double>& m_data; // reference to original tensor data
