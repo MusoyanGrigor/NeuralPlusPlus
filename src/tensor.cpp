@@ -27,7 +27,7 @@ Tensor Tensor::zeros(const tensorShape& shape) {
     return Tensor(shape);
 }
 
-Tensor Tensor::full(const tensorShape& shape, double value) {
+Tensor Tensor::full(const tensorShape& shape, const double value) {
     Tensor t(shape);
     std::fill(t.m_data.begin(), t.m_data.end(), value);
     return t;

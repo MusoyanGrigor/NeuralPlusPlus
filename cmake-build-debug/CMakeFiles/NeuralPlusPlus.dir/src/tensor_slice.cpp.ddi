@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles/NeuralPlusPlus.dir/src/tensor_slice.cpp.o",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}
