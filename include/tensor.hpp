@@ -13,6 +13,7 @@ public:
     [[nodiscard]] tensorShape getShape() const;
     [[nodiscard]] std::size_t getNdims() const;
     [[nodiscard]] std::size_t getSize() const;
+    [[nodiscard]] std::vector<double> getData() const;
 
     // factory methods
     static Tensor zeros(const tensorShape& shape);

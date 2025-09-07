@@ -13,6 +13,10 @@ std::size_t Tensor::getSize() const {
     return m_data.size();
 }
 
+std::vector<double> Tensor::getData() const {
+    return m_data;
+}
+
 Tensor::Tensor(const tensorShape& shape) : m_shape(shape), m_ndims(shape.size()) {
     std::size_t total_size = 1;
     for(const auto dim : shape) {
@@ -49,11 +53,11 @@ TensorSlice Tensor::operator[](std::size_t index) {
     }
 
     if(m_ndims == 1) {
-        return {m_data, {}, index};
+        return {m_data, index, {}, m_shape};
     }
     std::size_t stride = 1;
     for(std::size_t i = 1; i < m_ndims; i++) {
         stride *= m_shape[i];
     }
-    return {m_data, std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()), index * stride};
+    return {m_data, index * stride, std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()), m_shape};
 }
