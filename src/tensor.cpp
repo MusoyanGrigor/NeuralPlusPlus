@@ -15,13 +15,13 @@ std::size_t Tensor::getSize() const {
 
 Tensor::Tensor(const tensorShape& shape) : m_shape(shape), m_ndims(shape.size()) {
     std::size_t total_size = 1;
-    for(auto dim : shape) {
+    for(const auto dim : shape) {
         total_size *= dim;
     }
     m_data.resize(total_size, 0.0); // fills with zeros
 }
 
-Tensor::Tensor(std::initializer_list<std::size_t> shape) : Tensor(tensorShape(shape)) {} // delegates to the first constructor
+Tensor::Tensor(const std::initializer_list<std::size_t> shape) : Tensor(tensorShape(shape)) {} // delegates to the first constructor
 
 Tensor Tensor::zeros(const tensorShape& shape) {
     return Tensor(shape);
@@ -33,7 +33,7 @@ Tensor Tensor::full(const tensorShape& shape, const double value) {
     return t;
 }
 
-Tensor Tensor::eye(std::size_t rows, std::size_t cols) {
+Tensor Tensor::eye(const std::size_t rows, std::size_t cols) {
   if(cols == 0) cols = rows;
   Tensor t({rows, cols});
 
@@ -50,11 +50,10 @@ TensorSlice Tensor::operator[](std::size_t index) {
 
     if(m_ndims == 1) {
         return {m_data, {}, index};
-    } else {
-        std::size_t stride = 1;
-        for(std::size_t i = 1; i < m_ndims; i++) {
-            stride *= m_shape[i];
-        }
-        return {m_data, std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()), index * stride};
     }
+    std::size_t stride = 1;
+    for(std::size_t i = 1; i < m_ndims; i++) {
+        stride *= m_shape[i];
+    }
+    return {m_data, std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()), index * stride};
 }

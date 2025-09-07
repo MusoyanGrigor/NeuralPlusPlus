@@ -26,7 +26,7 @@ TensorSlice::operator double&() const {
     return m_data[m_offset];
 }
 
-TensorSlice& TensorSlice::operator=(double value) {
+TensorSlice& TensorSlice::operator=(const double value) {
     m_data[m_offset] = value;
     return *this;
 }
