@@ -1,6 +1,7 @@
 #ifndef TENSOR_HPP
 #define TENSOR_HPP
 
+#include <iosfwd>
 #include <vector>
 #include "tensor_slice.hpp"
 
@@ -13,7 +14,7 @@ public:
     [[nodiscard]] tensorShape getShape() const;
     [[nodiscard]] std::size_t getNdims() const;
     [[nodiscard]] std::size_t getSize() const;
-    [[nodiscard]] std::vector<double> getData() const;
+    [[nodiscard]] const std::vector<double>& getData() const;
 
     // factory methods
     static Tensor zeros(const tensorShape& shape);
@@ -22,6 +23,7 @@ public:
 
     // Element access
     TensorSlice operator[](std::size_t index);
+    TensorSlice operator[](std::size_t index) const;
 private:
     explicit Tensor(const tensorShape& shape);
     Tensor(std::initializer_list<std::size_t> shape);

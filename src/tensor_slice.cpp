@@ -2,23 +2,25 @@
 #include "tensor.hpp"
 #include <stdexcept>
 
-TensorSlice::TensorSlice(std::vector<double>& data, const std::size_t offset, const std::vector<std::size_t>& shape,
-    const std::vector<std::size_t>& originalShape) : m_data(data), m_offset(offset), m_shape(shape), m_originalShape(originalShape){}
+TensorSlice::TensorSlice(std::vector<double>& data, const std::size_t offset,
+    const std::vector<std::size_t>& shape,
+    const std::vector<std::size_t>& originalShape)
+    : m_data(data), m_offset(offset), m_shape(shape), m_originalShape(originalShape) {}
 
 TensorSlice TensorSlice::operator[](const std::size_t index) {
-    if(m_shape.empty()) { throw std::out_of_range("index out of range"); }
-    if(index >= m_shape[0]) { throw std::out_of_range("index exceeds dimension size"); }
+    if(m_shape.empty()) { throw std::out_of_range("Index out of range"); }
+    if(index >= m_shape[0]) { throw std::out_of_range("Index exceeds dimension size"); }
 
     if(m_shape.size() == 1) {
         return {m_data, m_offset + index, {}, m_shape};
     }
-      std::size_t stride = 1; // number of elements in each sub-slice along this dimension.
-      for(std::size_t i = 1; i < m_shape.size(); ++i) {
-            stride *= m_shape[i];
-      }
-      return {m_data, m_offset + index * stride,
-          std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()), m_shape};
-
+    std::size_t stride = 1; // number of elements in each sub-slice along this dimension.
+    for(std::size_t i = 1; i < m_shape.size(); ++i) {
+        stride *= m_shape[i];
+    }
+    return {m_data, m_offset + index * stride,
+            std::vector<std::size_t>(m_shape.begin() + 1, m_shape.end()),
+            m_shape};
 }
 
 TensorSlice::operator double&() const {
@@ -38,13 +40,15 @@ TensorSlice& TensorSlice::operator=(const Tensor& t) {
         throw std::logic_error("Shape mismatch");
     }
 
-    const std::size_t& ndim = t.getNdims();
+    const std::size_t ndim = t.getNdims();
+
     // compute row-major strides for full tensor
     std::vector<size_t> strides(ndim);
     strides[ndim - 1] = 1;
     for (long long i = static_cast<long long>(ndim) - 2; i >= 0; --i) {
         strides[i] = strides[i + 1] * m_originalShape[i + 1];
     }
+
     // multi-index counter
     std::vector<size_t> idx(ndim, 0);
     std::size_t i = 0;
@@ -65,4 +69,8 @@ TensorSlice& TensorSlice::operator=(const Tensor& t) {
         if (dim < 0) break; // finished all elements
     }
     return *this;
+}
+
+TensorSlice& TensorSlice::operator=(Tensor&& t) {
+    return (*this = t); // delegate to const& overload
 }

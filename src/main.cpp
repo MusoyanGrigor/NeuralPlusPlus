@@ -2,8 +2,9 @@
 
 int main() {
     Tensor t = Tensor::zeros({3, 3, 3});
-    Tensor eye = Tensor::eye(3);
+    const Tensor eye = Tensor::eye(3);
 
     t[0] = eye;
-    return 0;
+    t[1] = Tensor::eye(3);
+
 }
