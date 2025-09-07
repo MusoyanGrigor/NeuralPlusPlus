@@ -2,8 +2,6 @@
 #define TENSOR_SLICE_HPP
 
 #include <vector>
- 
-class Tensor;
 
 class TensorSlice {
 public:
